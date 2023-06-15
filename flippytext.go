@@ -42,17 +42,11 @@ func (t *FlippyText) Write(word string) error {
 	if err != nil {
 		return errors.New("unable to write to output:" + err.Error())
 	}
-	cleaned := strings.Replace(word, "\r", "", -1) //strip out "\r"s
-	parts := strings.Split(cleaned, "\n")
-	for _, part := range parts {
-		for c := 0; c < len(part); c++ {
-			for i := 0; i < t.TickerCount; i++ {
-				time.Sleep(t.TickerTime)
-				//r := rand.Intn(len(t.RandomChars) - 1)
-				fmt.Fprintf(t.Output, "\r%s", part[:c])
-			}
-		}
-		fmt.Fprintf(t.Output, "\r"+part+"\n")
+	word = strings.TrimLeft(word, "\n")
+	for _, part := range word {
+		time.Sleep(t.TickerTime)
+		fmt.Fprintf(t.Output, string(part))
 	}
+	fmt.Println()
 	return nil
 }

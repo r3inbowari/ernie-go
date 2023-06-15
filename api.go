@@ -1,13 +1,14 @@
 package ernie
 
 import (
+	"fmt"
 	"github.com/donovanhide/eventsource"
 	"github.com/google/uuid"
 	"net/http"
 )
 
-func New(cookie string) *Ernie {
-	return &Ernie{Cookie: cookie, Session: uuid.New().String()}
+func New(token string) *Ernie {
+	return &Ernie{Cookie: fmt.Sprintf("BDUSS=%s;", token), Session: uuid.New().String()}
 }
 
 func (bd *Ernie) SetCookie(cookie string) *Ernie {

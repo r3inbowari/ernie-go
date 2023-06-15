@@ -26,3 +26,5 @@ _testmain.go
 dist/*
 
 .idea/
+*.zip
+cmd/ernie_*

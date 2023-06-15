@@ -10,7 +10,7 @@ import (
 )
 
 type Config struct {
-	Cookie string `json:"cookie"`
+	Token string `json:"token"`
 }
 
 var ai *ernie.Ernie
@@ -24,12 +24,12 @@ func main() {
 		os.Exit(2)
 	}
 	err = yaml.Unmarshal(data, &config)
-	if len(config.Cookie) == 0 {
+	if len(config.Token) == 0 {
 		fmt.Println("please enter your bduss in config.yaml and restart")
 		time.Sleep(time.Second * 5)
 		return
 	}
-	ai = ernie.New(config.Cookie)
+	ai = ernie.New(config.Token)
 
 	for {
 		inputReader := bufio.NewReader(os.Stdin)
@@ -51,11 +51,11 @@ func query(prompts string) {
 		select {
 		case event := <-stream.Events:
 			seg, err1 := ernie.ParseStreamSegment(event.Data())
-			if seg.Status != 0 {
-				panic(fmt.Sprintf("error response status code: %d, please check your bduss token\n", seg.Status))
-			}
 			if err1 != nil {
 				continue
+			}
+			if seg.Status != 0 {
+				panic(fmt.Sprintf("error response status code: %d, please check your bduss token\n", seg.Status))
 			}
 			if !seg.Empty() {
 				ft := &ernie.FlippyText{

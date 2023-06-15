@@ -21,9 +21,9 @@ import (
 )
 
 func main() {
-	baiduCookie := "你的百度 bduss"
+	token := "你的百度 bduss"
 	prompts := "你的问题"
-	stream, _ := ernie.New(baiduCookie).Query(prompts)
+	stream, _ := ernie.New(token).Query(prompts)
 	for {
 		select {
 		case event := <-stream.Events:
