@@ -2,12 +2,10 @@ package main
 
 import (
 	"bufio"
-	"errors"
 	"fmt"
 	"github.com/r3inbowari/ernie"
 	"gopkg.in/yaml.v3"
 	"os"
-	"syscall"
 	"time"
 )
 
@@ -21,12 +19,9 @@ func main() {
 	config := Config{}
 	data, err := os.ReadFile("config.yaml")
 	if err != nil {
-		if errors.Is(err, syscall.ERROR_FILE_NOT_FOUND) {
-			fmt.Println("not found config file", err)
-		} else {
-			panic(err)
-		}
-		return
+		fmt.Println("not found config file", err)
+		time.Sleep(time.Second * 5)
+		os.Exit(2)
 	}
 	err = yaml.Unmarshal(data, &config)
 	if len(config.Cookie) == 0 {
