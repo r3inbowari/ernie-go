@@ -43,5 +43,13 @@ func main() {
 
 ```
 
+## 获取 bduss
+![image](https://github.com/r3inbowari/ernie-go/assets/30739857/a026f677-385e-4c52-8217-991a28b0c690)
+
+
+## 其它
+![image](https://github.com/r3inbowari/ernie-go/assets/30739857/c76dfa79-7b07-4933-b442-1b2978891f74)
+
+
 ## 注意事项
 Only for test, Please abide by Baidu User Terms. 请遵守百度用户条款，切勿滥用。 
