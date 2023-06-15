@@ -1,10 +1,15 @@
 package ernie
 
 import (
+	"errors"
 	"fmt"
 	"github.com/donovanhide/eventsource"
 	"github.com/google/uuid"
 	"net/http"
+)
+
+var (
+	ErrEmptyPrompt = errors.New("empty prompt")
 )
 
 func New(token string) *Ernie {
@@ -17,6 +22,9 @@ func (bd *Ernie) SetCookie(cookie string) *Ernie {
 }
 
 func (bd *Ernie) Query(text string) (stream *eventsource.Stream, err error) {
+	if len(text) == 0 || text == "\r" || text == "\r\n" {
+		return nil, ErrEmptyPrompt
+	}
 	wrapper, err := bd.messageWrapper(text)
 	if err != nil {
 		return

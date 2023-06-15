@@ -6,6 +6,7 @@ import (
 	"github.com/r3inbowari/ernie"
 	"gopkg.in/yaml.v3"
 	"os"
+	"strings"
 	"time"
 )
 
@@ -38,12 +39,15 @@ func main() {
 		if err != nil {
 			panic(err)
 		}
-		query(prompts)
+		query(strings.TrimRight(prompts, "\r\n"))
 	}
 }
 
 func query(prompts string) {
 	stream, err := ai.Query(prompts)
+	if err == ernie.ErrEmptyPrompt {
+		return
+	}
 	if err != nil {
 		panic(err)
 	}
