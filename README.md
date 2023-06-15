@@ -2,7 +2,7 @@
 Baidu Ernie Pure Go CLI and API  
 第三方百度文心一言命令行与接口  
 
-低门槛，普通百度用户也可使用，填入 `bduss` 即可运行。
+填入 `bduss` 即可使用，可能仅限beta用户。
 
 ## 测试用 CLI 使用方法
 在config.yaml 中填写你的百度 bduss，bduss可以从浏览器 `F12` 中获取
